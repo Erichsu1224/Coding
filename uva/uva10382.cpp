@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include 
 using namespace std;
 
 struct Item
@@ -105,4 +106,5 @@ int main(void)
 			printf("%d\n", counter);
 		}
 	}
+	return 0;
 }

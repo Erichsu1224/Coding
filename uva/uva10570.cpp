@@ -13,7 +13,7 @@ int change_max;
 void find(void)
 {
 	int tmp[maxn*2];
-	for(int i = 0; i < n*2; i++)
+	for(int i = 0; i < n*2; i++) 
 	{
 		tmp[i] = alien[i%n]-1;
 	}

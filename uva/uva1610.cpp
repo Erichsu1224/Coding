@@ -8,6 +8,11 @@ string cst[max];
 
 int main(void)
 {
+	#ifndef file
+	freopen("in.in", "r", stdin);
+	freopen("out.out", "w", stdout);
+	#endif
+	
 	int n;
 
 	while(scanf("%d", &n))

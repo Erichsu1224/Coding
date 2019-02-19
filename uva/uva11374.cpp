@@ -1,51 +1,52 @@
-#include <iostream>	
+#include <iostream>
+#include <cstdio>
 #include <vector>
 #include <queue>
-#include <cstring>
-
 using namespace std;
-#define maxn 510
-#define INF 1e18
-
-struct Edge
-{
-	int from, to, dist;
-};
 
 struct Item
 {
-	int d, u;
-	bool operator <(const Item& rs) const
+	int from, to, dist;
+
+	Item(int from, int to, int dist) : from(from), to(to), dist(dist) {}
+
+	bool operator< (const Item r) const
 	{
-		return d > rs.d;
+		return r.dist > dist;
 	}
 };
 
-class dijkstra
+int main(void)
 {
-private:
-	int n, m;
-	vector<Edge> edges;
-	vector<int> G[maxn];
-	bool visited[maxn];
-	int d[maxn];
-	int p[maxn];
-	
+	int N, S, E;
+	int M, K;
+	vector<Item> edges;
+	vector<Item> edges_Co;
 
-
-
-
-
-
-
-
-
-public:
-	void AddEdge(int from, int to, int dist)
+	while(cin >> N >> S >> E)
 	{
-		edges.push_back()
+		cin >> M;
+		for(int i = 0; i < M; i++)
+		{
+			int X, Y, Z;
+			cin >> X >> Y >> Z;
+			edges.push_back(Item(X, Y, Z));
+		}
+
+		cin >> K;
+		for(int i = 0; i < K; i++)
+		{
+			int X, Y, Z;
+			cin >> X >> Y >> Z;
+			edges_Co.push_back(Item(X, Y, Z));
+		}
+
+		// double side dijkstra
+		priority_queue<Item> q;
+
+		
+
+
 	}
-
-
-	for(int i = 0; )
+	return 0;
 }

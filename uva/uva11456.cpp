@@ -2,15 +2,21 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <vector>
 using namespace std;
 
+#define ll long long
+#define C cases
+#define pb push_back
 #define maxn 2100
-
-int ls[maxn];
-int dp[maxn];
 
 int main(void)
 {
+	#ifndef file
+	freopen("in.in", "r", stdin);
+	freopen("out.out", "w", stdout);
+	#endif
+
 	int cases;
 
 	cin >> cases;
@@ -18,39 +24,38 @@ int main(void)
 	while(cases--)
 	{
 		int n;
+		vector<int> lis;
+		vector<int> lis2;
+		vector<int> in;
 
-		cin >> n;
+		scanf("%d", &n);
+		
+		for(int i = 0; i < n; i++)
+		{
+			int a;
+
+			scanf("%d", &a);
+			in.pb(a);
+		}
+
+
+	 
+		for(int i = 0; i < n; i++)
+		{
+			if(lis.size() == 0 || in[i] > lis.back())
+				lis.pb(in[i]);
+			else
+				*lower_bound(lis.begin(), lis.end(), in[i]) = in[i];
+		}
 
 		for(int i = 0; i < n; i++)
 		{
-			scanf("%d", &ls[i]);
+			if(lis2.size() == 0 || in[i] < lis2.back())
+				lis2.pb(in[i]);
+			else
+				*lower_bound(lis.begin(), lis2.end(), in[i]) = in[i];
 		}
-	 
-	    memset(dp, 0, n);
-	    dp[0] = ls[0];
-	    int top = 0;
-	 
-	    for(int i = 1; i < n; i++)
-	    {   
-	        int left = 0, right = top;
-			bool found = false;
 
-			while(left <= right)
-			{
-				if(ls[i] > dp[(left+right)/2])	left = (left+right)/2+1;
-				else if(ls[i] < dp[(left+right)/2])		right = (left+right)/2-1;
-				else if(ls[i] == dp[(left+right)/2])	
-				{
-					found = true;
-					break;
-				}
-			}
-			if(found)	continue;
-			dp[right+1] = ls[i];
-
-			if(right == top)	top++;
-	    }
-
-	    cout << top+1 << endl;
+	    printf("%lu\n", lis.size()+lis2.size()-1);
 	}
 }

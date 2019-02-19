@@ -1,73 +1,44 @@
 #include <iostream>
 #include <cstdio>
-#include <queue>
+#include <vector>
+#include <cmath>
 #include <algorithm>
 using namespace std;
 
-#define max 750
-
-struct Item
-{
-	int sum, b;
-
-	Item(int sum, int b) : sum(sum), b(b){}
-
-	bool operator <(const Item&r) const
-	{
-		return sum > r.sum;
-	}
-};
-
-void merge(int *A, int *B, int k)
-{
-	priority_queue <Item> q;
-
-	for(int i = 0; i < k; i++)
-		q.push(Item(A[i]+B[0], 0));
-	for(int i = 0; i < k; i++)
-	{
-		Item item = q.top();
-		q.pop();
-		A[i] = item.sum;
-		int b = item.b;
-		q.push(Item(A[0]-B[b]+B[b+1], b+1));
-	}
-}
+int fibo[1000];
 
 int main(void)
 {
-	int k;
-	int first = 1;
-	int A[max];
-	int B[max];
-
-	while(scanf("%d", &k) != EOF)
+	//fibo
+	for(int i = 0; i < 50; i++)
 	{
-		for(int i = 1; i < k; i++)
+		if(i == 0)	fibo[i] = 0;
+		if(i == 1)	fibo[i] = 1;
+
+		else	fibo[i] = fibo[i-1] + fibo[i-2];
+	}
+
+	int cases;
+
+	scanf("%d", &cases);
+
+	while(cases--)
+	{
+		unsigned long long a, b;
+		int mod;
+		vector<int> lis;
+
+		scanf("%lld %lld %d", &a, &b, &mod);
+
+		for(int i = 0; i < 50; i++)
 		{
-			if(first)
-			{
-				for(int j = 0; j < k; j++)
-				{
-					scanf("%d", &A[j]);
-				}
-				sort(A, A+k);
-				first = 0;
-			}
+			lis.push_back(fibo[i] % mod);
 
-			for(int j = 0; j < k; j++)
-			{
-				scanf("%d", &B[j]);
-			}
-			sort(B, B+k);
-
-			merge(A, B, k);
+			if(lis[i] == 0 && lis[i-1] == 1)
+				break;
 		}
-		cout << A[0];
-		for(int i = 1; i < k; i++)
-			printf(" %d", A[i]);
-		cout << endl;
-		first = 1;
+
+		cout << lis[pow(a%mod, b) % mod] << endl;
 	}
 	return 0;
 }
